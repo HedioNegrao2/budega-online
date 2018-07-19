@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default props => (
-  
+  <div>
  
   <aside className='main-sidebar sidebar-dark-primary elevation-4'>
    {/* Brand Logo*/}
@@ -67,6 +67,6 @@ export default props => (
    {/* /.sidebar*/}
   </aside>
 
-
+ </div>
 
 )

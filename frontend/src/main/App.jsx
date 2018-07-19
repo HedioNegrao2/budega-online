@@ -1,13 +1,17 @@
 import React from 'react'
 import '../common/template/dependeces'
 
-import Hader from  '../common/template/Hader'
+import NabBar from  '../common/template/NaveBar'
 import Menu from  '../common/template/Menu'
+import Segundo from '../common/template/Segundo'
+import Footer from '../common/template/Footer' 
 
 
 export default props => (
     <div className='wrapper'>
-    <Hader />
-    
+        <NabBar />
+        
+        <Segundo />
+        <Footer />
     </div>
 )
