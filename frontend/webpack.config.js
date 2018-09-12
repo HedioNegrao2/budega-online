@@ -9,11 +9,20 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'app.js',
-        path: __dirname + '/public'
+        path: __dirname + '/public',
+        globalObject: `typeof self !== 'undefined' ? self : this`
     },
     devServer: {
         contentBase: "./public",
         port: 3000
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx'],
+        alias: {
+            modules: __dirname + '/node_modules',
+            jquery: 'modules/admin-lte/bower_components/jquery/dist/jquery.min.js',
+            bootstrap: 'modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js'
+        }
     },
     optimization: {
         minimizer: [
@@ -39,9 +48,9 @@ module.exports = {
             test: /\.s?[ac]ss$/,
             use: [
                 MiniCssExtractPlugin.loader,
-                // 'style-loader', // Adiciona CSS a DOM injetando a tag <style>
-                'css-loader', // interpreta @import, url()...
-                'sass-loader',
+              //  'style-loader', // Adiciona CSS a DOM injetando a tag <style>
+                'css-loader', // interpreta @import, url()...                
+               // 'sass-loader',
             ]
         }, {
             test: /\.(woff|woff2|ttf|eot|png|svg|jpg|gif)$/,
@@ -51,18 +60,15 @@ module.exports = {
               {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: ['babel-loader']
-              }           
+                use: {
+                    loader: "babel-loader"
+                    
+                }        
+            }           
         ]
     },
-    resolve: {
-        extensions: ['*', '.js', '.jsx'],
-        alias: {
-            modules: __dirname + '/node_modules',
-            jquery: 'modules/admin-lte/plugins/jquery/jquery.min.js',
-            bootstrap: 'modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js'
-        }
-      }
+   
+    
 
      
        

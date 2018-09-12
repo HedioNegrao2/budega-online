@@ -15,10 +15,11 @@ import Final from  '../common/template/Final'
 export default props => (
     <div className='wrapper'>
         <Header />
-        <Asside />       
-        <Principal />
+        <Asside />
         <Footer />
+        <Principal />
         <AssideControl />
         <Final />
+      
     </div>
 )
