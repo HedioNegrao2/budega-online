@@ -10,7 +10,7 @@ export const tokenResolvers = {
                 where: {email: email},
                 attributes: ['id', 'password']
             }).then((user) => {
-
+                console.log('consultando')
                 let errorMessage = 'Unauthorized, wrong email or password!';
                 if (!user || !user.isPassword(user.get('password'), password)) { throw new Error(errorMessage); }
 

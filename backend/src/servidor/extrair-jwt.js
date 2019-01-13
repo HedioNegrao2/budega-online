@@ -4,19 +4,18 @@ import db from '../models';
 import { JWT_SECRET } from '../comun/utils';
 
 
-export const extractJwt = (req, res, next)  => {
-    console.log('passando pelo o extract token')
+export const extractJwt = (req, res, next)  => {   
 
     return (req, res, next) => {
-        console.log('passando return')
-        let authorization = req.authorization;
+        console.log('Extraindo o token')
+        let authorization = req.header('authorization')
         let token = authorization ? authorization.split(' ')[1] : undefined;
-        console.log('passando token')
+        console.log(token)
         req['context'] = {};
         req['context']['authorization'] = authorization;
-        console.log('passando authorization')
-        if (!token) { return next(); }
-        console.log('passando next')
+       
+        if (!token) { return next() }
+
         jwt.verify(token, JWT_SECRET, (err, decoded) => {
 
             if (err) { return next(); }
@@ -26,9 +25,9 @@ export const extractJwt = (req, res, next)  => {
             }).then((usuario) => {
 
                 if (usuario) {
-                    req['context']['authUser'] = {
-                        id: usuario.id,
-                        email: usuario.email
+                    req['context']['user'] = {
+                        id: usuario.get('id'),
+                        email: usuario.get('email')
                     };
                 }
 

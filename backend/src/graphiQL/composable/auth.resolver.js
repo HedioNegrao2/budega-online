@@ -4,14 +4,19 @@
 
 
 export const authResolver = (root, args, context, info) => {
-    console.log('passando pelo authResolver')
-    
-    return  (root, args, context, info) => {
-        if (context.authUser || context.authorization) {
-            return resolver(parent, args, context, info);
-        }
-        throw new Error('Unauthorized! Token not provided!');         
-    }
+    console.log('passondo pelo resolver outauthResolver' )
+   
+       
+    if (context.authUser || context.authorization) {
+        console.log('dentro pelo resolver outauthResolver' )
+        return resolver(parent, args, context, info)
+    }  
+    else
+    {
+        console.log('nao autorizado pelo resolver outauthResolver' )        
+        throw new Error('Unauthorized! Token not provided!') 
+    }       
+
 }
 
 

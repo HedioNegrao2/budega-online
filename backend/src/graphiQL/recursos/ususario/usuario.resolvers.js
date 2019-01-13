@@ -15,7 +15,7 @@ const isAuthenticated2 = (root, args, context, info) => {
 
 export const usuarioResolvers = {
     Query: {
-         todosUsuarios :    combineResolvers( authResolver, isAuthenticated,  (req, args, context, info) => {
+         todosUsuarios : combineResolvers( authResolver,   (req, args, context, info) => {
            console.log('consultando')
             //    console.log(' ------- req')
             //   console.log(req)
@@ -32,7 +32,7 @@ export const usuarioResolvers = {
     Mutation : {  
       
             async  criarUsuario (parent, args)  {
-               // console.log(' imprimindo args', args)
+                console.log(' imprimindo args', args)
                 return await  db.Usuario.create(args).catch(handleError)               
         }    
     }

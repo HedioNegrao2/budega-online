@@ -8,9 +8,8 @@ import { extractJwt } from './extrair-jwt'
 
 
 const  dbs = db
-//bs.sequelize.sync().done() ;
 
-const PORT = 3000
+const PORT = 3005
 
 const server = restify.createServer({
   title: 'Apollo Server',
@@ -29,10 +28,10 @@ server.use(restify.plugins.queryParser());
 server.on('restifyError', handleError);
  
 server.post(
-    '/graphql',  
+    '/api',  
     extractJwt(),
     (req, res, next) => {
-      req['context'] = {}
+      console.log( ' tentando post')
       req['context']['db'] = dbs 
       next()
     },   
@@ -43,10 +42,10 @@ server.post(
     )
 );
 server.get(
-  '/graphql',
+  '/api',
   extractJwt(),
-  (req, res, next) => {
-    req['context'] = {}; 
+  (req, res, next) => {  
+    console.log( ' tentando get')  
     req['context']['db'] = dbs;
     next();
   },
@@ -59,11 +58,16 @@ server.get(
 )
 server.get(
     '/graphiql',  
-    graphiqlRestify({ endpointURL: '/graphql' })
+    graphiqlRestify({ endpointURL: '/api' })
 
   );
+db.sequelize.sync().done(
+  
+  server.listen(PORT, () => console.log(`Listening on ${PORT}`))
+) ;
+
+console.log(' Sincronizado')
 
 
-server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 export default server;

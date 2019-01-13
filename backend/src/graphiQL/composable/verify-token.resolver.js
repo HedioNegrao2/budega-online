@@ -8,9 +8,10 @@ import * as jwt from 'jsonwebtoken';
 
 
 export const isAuthenticated = (root, args, context, info) => {
-    console.log('passando pelo composicao')
+   
     
     return  (root, args, context, info) => {
+        console.log('passando pelo isAuthenticated')
             const token = context.authorization.split(' ')[1];
                 
             return jwt.verify(token, JWT_SECRET, (err, decoded) => {
